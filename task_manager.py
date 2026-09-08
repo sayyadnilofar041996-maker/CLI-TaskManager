@@ -11,12 +11,22 @@ tasks = []
 def add_task():
     title = input("Enter the task title: ")
     description = input("Enter task description: ")
-    due_date = input("Enter due date ((DD-MM-YYYY)): ")
-    try:
-        due_date = datetime.strptime(due_date, "%d-%m-%Y").date()
-    except ValueError:
-        print("Enter date in given format (DD-MM-YYYY)")
-        return
+     
+    while True:
+        due_date = input("Enter due date ((DD-MM-YYYY)): ")
+        try:
+            due_date = datetime.strptime(due_date, "%d-%m-%Y").date()
+        except ValueError:
+            print("Enter date in given format (DD-MM-YYYY)")
+            continue
+        today = datetime.today().date()
+        
+        if due_date < today:
+            print("Invalid Date !! Please Enter Today Or Future Date")
+            continue
+        break
+            
+        
     task = {"title": title, "description": description, "due_date": due_date, "completed": False}
     tasks.append(task)
     print("Task Added Succesfully")
@@ -30,6 +40,22 @@ def view_task():
             print("Task",i,":")
             for key,value in task.items():
                 print(key, ":", value)
+
+
+def complete_task():
+    try:
+        task_number = int(input("Enter the task number: "))
+    except ValueError:
+        print("Enter the right task number")
+        return
+    
+    index = task_number - 1
+    try:
+        task = tasks[index]
+        task["completed"] = True
+    except IndexError:
+        print("No Task with that number")
+    
 
 
 def main():
@@ -46,7 +72,7 @@ def main():
         elif choice == 2:
             view_task()
         elif choice == 3:
-            print("Complete Taask: Coming Soon")
+            complete_task()
         elif choice == 4:
             print("Delete Task: Coming Soon")
         elif choice == 5:
