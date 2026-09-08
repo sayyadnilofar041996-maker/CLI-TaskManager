@@ -21,6 +21,16 @@ def add_task():
     tasks.append(task)
     print("Task Added Succesfully")
 
+def view_task():
+    if tasks == []:
+        print("No Task Added Yet")
+    else:
+        print("Here is the task list")
+        for i, task in enumerate(tasks, start =1):
+            print("Task",i,":")
+            for key,value in task.items():
+                print(key, ":", value)
+
 
 def main():
     while True:
@@ -34,7 +44,7 @@ def main():
         if choice == 1:
             add_task()
         elif choice == 2:
-            print("Show Task: Coming Soon")
+            view_task()
         elif choice == 3:
             print("Complete Taask: Coming Soon")
         elif choice == 4:
