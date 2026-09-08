@@ -48,11 +48,24 @@ def complete_task():
     except ValueError:
         print("Enter the right task number")
         return
-    
     index = task_number - 1
     try:
         task = tasks[index]
         task["completed"] = True
+        print("Task mark out completed")
+    except IndexError:
+        print("No Task with that number")
+
+def delete_task():
+    try:
+        task_number = int(input("Enter the task number which you want to delete: "))
+    except ValueError:
+        print("Enter the right task number")
+        return    
+    index = task_number - 1
+    try:
+        tasks.pop(index)
+        print("Task deleted sucessfully")
     except IndexError:
         print("No Task with that number")
     
@@ -74,7 +87,7 @@ def main():
         elif choice == 3:
             complete_task()
         elif choice == 4:
-            print("Delete Task: Coming Soon")
+            delete_task()
         elif choice == 5:
             print("Search Task: Coming Soon")
         elif choice == 6:
