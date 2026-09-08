@@ -1,3 +1,4 @@
+from datetime import datetime
 def show_menu():
     print("1. Add Task")
     print("2. Show Task")
@@ -6,6 +7,21 @@ def show_menu():
     print("5. Search Task")
     print("6. Exit")
 
+tasks = []
+def add_task():
+    title = input("Enter the task title: ")
+    description = input("Enter task description: ")
+    due_date = input("Enter due date ((DD-MM-YYYY)): ")
+    try:
+        due_date = datetime.strptime(due_date, "%d-%m-%Y").date()
+    except ValueError:
+        print("Enter date in given format (DD-MM-YYYY)")
+        return
+    task = {"title": title, "description": description, "due_date": due_date, "completed": False}
+    tasks.append(task)
+    print("Task Added Succesfully")
+
+
 def main():
     while True:
         show_menu()
@@ -13,9 +29,10 @@ def main():
             choice = int(input("Enter the Menu Number: "))
         except ValueError:
             print("Please Enter an Integer value")
+            continue
 
         if choice == 1:
-            print("Add Task: Coming Soon")
+            add_task()
         elif choice == 2:
             print("Show Task: Coming Soon")
         elif choice == 3:
@@ -31,3 +48,4 @@ def main():
             print("Invalid Menu Number, Enter Again")
 
 main()
+
