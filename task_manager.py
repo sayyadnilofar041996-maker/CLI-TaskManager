@@ -68,6 +68,25 @@ def delete_task():
         print("Task deleted sucessfully")
     except IndexError:
         print("No Task with that number")
+
+
+def search_task():
+    
+    task_title = input("Enter the task title you want to search: ")
+   
+    found = False
+    for task in tasks:
+        if task_title.lower() in task["title"].lower():
+            print("Title:", task["title"])
+            print("Description:", task["description"])
+            print("Due Date:", task["due_date"])
+            print("Completed:", task["completed"])
+            found = True
+
+    if not found:
+        print("Task not Found")
+
+    
     
 
 
@@ -89,7 +108,7 @@ def main():
         elif choice == 4:
             delete_task()
         elif choice == 5:
-            print("Search Task: Coming Soon")
+            search_task()
         elif choice == 6:
             print("Goodbye, See You Soon")
             break
